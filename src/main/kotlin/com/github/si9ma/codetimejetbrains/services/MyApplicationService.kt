@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.si9ma.codetimejetbrains.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.si9ma.codetimejetbrains.MyBundle
 
 class MyApplicationService {
 
