@@ -7,13 +7,16 @@
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.si9ma.codetimejetbrains.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.si9ma.codetimejetbrains.services.MyProjectService"/>
-    </extensions>
-
     <applicationListeners>
-        <listener class="com.github.si9ma.codetimejetbrains.listeners.MyProjectManagerListener"
+        <listener class="com.github.si9ma.codetimejetbrains.listeners.CodeTimeProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <extensions defaultExtensionNs="com.intellij">
+        <editorFactoryDocumentListener
+                implementation="com.github.si9ma.codetimejetbrains.listeners.CodeTimeDocumentListener"/>
+        <editorFactoryMouseListener
+                implementation="com.github.si9ma.codetimejetbrains.listeners.CodeTimeEditorMouseListener"/>
+        <fileDocumentManagerListener
+                implementation="com.github.si9ma.codetimejetbrains.listeners.CodeTimeSaveListener"/>
+    </extensions>
 </idea-plugin>
