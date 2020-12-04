@@ -11,10 +11,11 @@ class CodeTimeSaveListener : FileDocumentManagerListener {
     override fun beforeDocumentSaving(document: Document) {
         val instance = FileDocumentManager.getInstance()
         val file = instance.getFile(document)
-        val log: MutableMap<String, String> = HashMap()
-        log["file"] = file?.path ?: ""
+        val log: MutableMap<String, Any> = HashMap()
+        log["absoluteFile"] = file?.path ?: ""
         log["language"] = file?.let { Util.getLanguage(it) } ?: ""
-        log["type"] = "beforeDocumentSaving"
+        log["eventType"] = "beforeDocumentSaving"
+        log["eventTime"] = System.currentTimeMillis()
         Queue.logQueue.add(log)
     }
 }

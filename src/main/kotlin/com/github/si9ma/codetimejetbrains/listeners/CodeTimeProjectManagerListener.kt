@@ -8,6 +8,7 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
+import com.intellij.openapi.project.guessProjectDir
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -21,12 +22,16 @@ internal class CodeTimeProjectManagerListener : ProjectManagerListener {
         Timer().scheduleAtFixedRate(timerTask {
             if (Queue.logQueue.size > 0) {
                 while (true) {
-                    val h: MutableMap<String, String> = Queue.logQueue.poll() ?: break
+                    val h: MutableMap<String, Any> = Queue.logQueue.poll() ?: break
+                    val projectPath: String? = project.guessProjectDir()?.path
+                    val absoluteFile = h["absoluteFile"]
                     h["project"] = project.name
-                    Fuel.post("https://9fdc56e3a910ba3e4430351c03d9494a.m.pipedream.net").jsonBody(Klaxon().toJsonString(h)).response { result -> println(result.get()) }
+                    h["platform"] = "MacOS"
+                    h["editor"] = "IDEA"
+                    h["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
+                    Fuel.post("http://codetime.si9ma.com:5000/eventLog").jsonBody(Klaxon().toJsonString(h)).response { result -> println(result.get()) }
                     log.info(h.toString())
                     println(h.toString())
-//                    sendHeartbeat(heartbeat, extraHeartbeats)
                 }
             }
         }, 100, 100)

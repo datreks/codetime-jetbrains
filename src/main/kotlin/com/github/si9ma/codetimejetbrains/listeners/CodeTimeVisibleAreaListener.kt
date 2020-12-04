@@ -11,10 +11,11 @@ class CodeTimeVisibleAreaListener : VisibleAreaListener {
     override fun visibleAreaChanged(e: VisibleAreaEvent) {
         val instance = FileDocumentManager.getInstance()
         val file = instance.getFile(e.editor.document)
-        val log: MutableMap<String, String> = HashMap()
-        log["file"] = file?.path ?: ""
+        val log: MutableMap<String, Any> = HashMap()
+        log["absoluteFile"] = file?.path ?: ""
         log["language"] = file?.let { Util.getLanguage(it) } ?: ""
-        log["type"] = "visibleAreaChanged"
+        log["eventType"] = "visibleAreaChanged"
+        log["eventTime"] = System.currentTimeMillis()
         Queue.logQueue.add(log)
     }
 }

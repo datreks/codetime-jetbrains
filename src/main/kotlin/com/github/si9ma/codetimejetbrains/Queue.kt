@@ -4,5 +4,5 @@ import java.util.concurrent.ConcurrentLinkedQueue
 
 
 object Queue {
-    val logQueue: ConcurrentLinkedQueue<MutableMap<String, String>> = ConcurrentLinkedQueue()
+    val logQueue: ConcurrentLinkedQueue<MutableMap<String, Any>> = ConcurrentLinkedQueue()
 }
