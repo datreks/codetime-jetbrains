@@ -31,6 +31,7 @@ internal class CodeTimeProjectManagerListener : ProjectManagerListener {
                         val h: MutableMap<String, Any> = Queue.logQueue.poll() ?: break
                         val projectPath: String? = project.guessProjectDir()?.path
                         val absoluteFile = h["absoluteFile"]
+                        h["userID"] = 1
                         h["project"] = project.name
                         h["platform"] = System.getProperty("os.name") + " " + System.getProperty("os.version") +
                             " " + System.getProperty("os.arch")
