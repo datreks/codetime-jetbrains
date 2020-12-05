@@ -5,11 +5,13 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.si9ma.codetimejetbrains.Queue
 import com.google.common.primitives.UnsignedInts.toLong
+import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
+import com.intellij.util.PlatformUtils
 import java.util.Timer
 import kotlin.concurrent.timerTask
 
@@ -30,8 +32,10 @@ internal class CodeTimeProjectManagerListener : ProjectManagerListener {
                         val projectPath: String? = project.guessProjectDir()?.path
                         val absoluteFile = h["absoluteFile"]
                         h["project"] = project.name
-                        h["platform"] = "MacOS"
-                        h["editor"] = "IDEA"
+                        h["platform"] = System.getProperty("os.name") + " " + System.getProperty("os.version") +
+                            " " + System.getProperty("os.arch")
+                        h["editor"] = PlatformUtils.getPlatformPrefix() +
+                            " " + ApplicationInfo.getInstance().fullVersion
                         h["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
                         Fuel.post("http://codetime.si9ma.com:5000/eventLog")
                             .jsonBody(Klaxon().toJsonString(h)).response { result -> println(result.get()) }
