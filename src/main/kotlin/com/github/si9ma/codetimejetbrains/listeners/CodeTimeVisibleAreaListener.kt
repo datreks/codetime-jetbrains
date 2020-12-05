@@ -6,7 +6,6 @@ import com.intellij.openapi.editor.event.VisibleAreaEvent
 import com.intellij.openapi.editor.event.VisibleAreaListener
 import com.intellij.openapi.fileEditor.FileDocumentManager
 
-
 class CodeTimeVisibleAreaListener : VisibleAreaListener {
     override fun visibleAreaChanged(e: VisibleAreaEvent) {
         val instance = FileDocumentManager.getInstance()

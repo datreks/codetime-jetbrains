@@ -6,7 +6,6 @@ import com.intellij.openapi.editor.Document
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileDocumentManagerListener
 
-
 class CodeTimeSaveListener : FileDocumentManagerListener {
     override fun beforeDocumentSaving(document: Document) {
         val instance = FileDocumentManager.getInstance()

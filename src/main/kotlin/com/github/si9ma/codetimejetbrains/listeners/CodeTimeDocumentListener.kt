@@ -7,7 +7,6 @@ import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.openapi.fileEditor.FileDocumentManager
 
-
 class CodeTimeDocumentListener : DocumentListener {
     override fun documentChanged(event: DocumentEvent) {
         val document: Document = event.document
