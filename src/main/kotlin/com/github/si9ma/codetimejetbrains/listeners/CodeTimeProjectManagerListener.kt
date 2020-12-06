@@ -13,6 +13,7 @@ import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.util.PlatformUtils
 import java.util.Timer
+import java.util.UUID
 import kotlin.concurrent.timerTask
 
 const val TIMER_DELAY = 100
@@ -23,6 +24,7 @@ internal class CodeTimeProjectManagerListener : ProjectManagerListener {
 
     override fun projectOpened(project: Project) {
         EditorFactory.getInstance().eventMulticaster.addVisibleAreaListener(CodeTimeVisibleAreaListener())
+        val uuid = UUID.randomUUID().toString()
 
         Timer().scheduleAtFixedRate(
             timerTask {
@@ -33,12 +35,15 @@ internal class CodeTimeProjectManagerListener : ProjectManagerListener {
                         val absoluteFile = h["absoluteFile"]
                         h["userID"] = 1
                         h["project"] = project.name
-                        h["platform"] = System.getProperty("os.name") + " " + System.getProperty("os.version") +
-                            " " + System.getProperty("os.arch")
-                        h["editor"] = PlatformUtils.getPlatformPrefix() +
-                            " " + ApplicationInfo.getInstance().fullVersion
+                        h["platform"] = System.getProperty("os.name")
+                        h["platformVersion"] = System.getProperty("os.version")
+                        h["platformArch"] = System.getProperty("os.arch")
+                        h["editor"] = PlatformUtils.getPlatformPrefix()
+                        h["editorVersion"] = ApplicationInfo.getInstance().fullVersion
+                        h["sessionID"] = uuid
                         h["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
-                        Fuel.post("http://codetime.si9ma.com:5000/eventLog")
+                        Fuel.post("https://codetime.si9ma.com/eventLog")
+                            .header("token", "e17eb6d6-7908-4cd9-a8cd-82801d799b4b")
                             .jsonBody(Klaxon().toJsonString(h)).response { result -> println(result.get()) }
                         log.info(h.toString())
                         println(h.toString())
