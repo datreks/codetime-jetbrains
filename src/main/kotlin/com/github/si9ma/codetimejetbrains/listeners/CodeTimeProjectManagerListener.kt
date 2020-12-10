@@ -71,7 +71,7 @@ class CodeTimeProjectManagerListener : ProjectManagerListener {
         event["editorVersion"] = ApplicationInfo.getInstance().fullVersion
         event["sessionID"] = uuid
         event["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
-        Fuel.post("https://codetime.si9ma.com/eventLog")
+        Fuel.post("https://codetime-api.datreks.com/eventLog")
             .header("token", PluginStateComponent.instance.state.token)
             .jsonBody(Klaxon().toJsonString(event)).responseJson() { _, _, result ->
                 result.fold(
