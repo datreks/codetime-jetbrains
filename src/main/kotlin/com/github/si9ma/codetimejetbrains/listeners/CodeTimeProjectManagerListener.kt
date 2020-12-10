@@ -3,14 +3,20 @@ package com.github.si9ma.codetimejetbrains.listeners
 import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.extensions.jsonBody
+import com.github.kittinunf.fuel.json.responseJson
+import com.github.si9ma.codetimejetbrains.ConfigWindow
+import com.github.si9ma.codetimejetbrains.PluginStateComponent
 import com.github.si9ma.codetimejetbrains.Queue
 import com.google.common.primitives.UnsignedInts.toLong
+import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.EditorFactory
+import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
+import com.intellij.openapi.ui.Messages
 import com.intellij.util.PlatformUtils
 import java.util.Timer
 import java.util.UUID
@@ -19,39 +25,67 @@ import kotlin.concurrent.timerTask
 const val TIMER_DELAY = 100
 const val TIMER_PERIOD = 100
 
-internal class CodeTimeProjectManagerListener : ProjectManagerListener {
+class CodeTimeProjectManagerListener : ProjectManagerListener {
     private val log: Logger = Logger.getInstance("CodeTime")
 
     override fun projectOpened(project: Project) {
-        EditorFactory.getInstance().eventMulticaster.addVisibleAreaListener(CodeTimeVisibleAreaListener())
         val uuid = UUID.randomUUID().toString()
+
+        // no token, popup a configuration window
+        if (PluginStateComponent.instance.state.token == "") {
+            ConfigWindow(project).show()
+        }
+        if (PluginStateComponent.instance.state.debug) {
+            val msg = "Running CodeTime in DEBUG mode. Your IDE may be slow when saving or editing files."
+            Messages.showWarningDialog(msg, "Debug")
+        }
 
         Timer().scheduleAtFixedRate(
             timerTask {
                 if (Queue.logQueue.size > 0) {
                     while (true) {
-                        val h: MutableMap<String, Any> = Queue.logQueue.poll() ?: break
-                        val projectPath: String? = project.guessProjectDir()?.path
-                        val absoluteFile = h["absoluteFile"]
-                        h["userID"] = 1
-                        h["project"] = project.name
-                        h["platform"] = System.getProperty("os.name")
-                        h["platformVersion"] = System.getProperty("os.version")
-                        h["platformArch"] = System.getProperty("os.arch")
-                        h["editor"] = PlatformUtils.getPlatformPrefix()
-                        h["editorVersion"] = ApplicationInfo.getInstance().fullVersion
-                        h["sessionID"] = uuid
-                        h["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
-                        Fuel.post("https://codetime.si9ma.com/eventLog")
-                            .header("token", "e17eb6d6-7908-4cd9-a8cd-82801d799b4b")
-                            .jsonBody(Klaxon().toJsonString(h)).response { result -> println(result.get()) }
-                        log.info(h.toString())
-                        println(h.toString())
+                        val event: MutableMap<String, Any> = Queue.logQueue.poll() ?: break
+                        submitEventLog(project, uuid, event)
                     }
                 }
             },
             toLong(TIMER_DELAY),
             toLong(TIMER_PERIOD)
         )
+    }
+
+    init {
+        val version = PluginManager.getPlugin(PluginId.getId("com.github.si9ma.codetimejetbrains"))?.version
+        log.info("Initializing CodeTime plugin:$version (https://codetime.datreks.com/)")
+        EditorFactory.getInstance().eventMulticaster.addVisibleAreaListener(CodeTimeVisibleAreaListener())
+    }
+
+    private fun submitEventLog(project: Project, uuid: String, event: MutableMap<String, Any>) {
+        val projectPath: String? = project.guessProjectDir()?.path
+        val absoluteFile = event["absoluteFile"]
+        event["project"] = project.name
+        event["platform"] = System.getProperty("os.name")
+        event["platformVersion"] = System.getProperty("os.version")
+        event["platformArch"] = System.getProperty("os.arch")
+        event["editor"] = PlatformUtils.getPlatformPrefix()
+        event["editorVersion"] = ApplicationInfo.getInstance().fullVersion
+        event["sessionID"] = uuid
+        event["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
+        Fuel.post("https://codetime.si9ma.com/eventLog")
+            .header("token", PluginStateComponent.instance.state.token)
+            .jsonBody(Klaxon().toJsonString(event)).responseJson() { _, _, result ->
+                result.fold(
+                    success = {
+                        if (PluginStateComponent.instance.state.debug) {
+                            log.info("submit event log success")
+                        }
+                    },
+                    failure = { error ->
+                        if (PluginStateComponent.instance.state.debug) {
+                            log.warn("submit event log failed:$error")
+                        }
+                    }
+                )
+            }
     }
 }

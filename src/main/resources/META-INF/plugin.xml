@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.si9ma.codetimejetbrains</id>
-    <name>codetime-jetbrains</name>
+    <name>codetime</name>
     <vendor>si9ma</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -18,5 +18,12 @@
                 implementation="com.github.si9ma.codetimejetbrains.listeners.CodeTimeEditorMouseListener"/>
         <fileDocumentManagerListener
                 implementation="com.github.si9ma.codetimejetbrains.listeners.CodeTimeSaveListener"/>
+        <applicationService
+                serviceImplementation="com.github.si9ma.codetimejetbrains.PluginStateComponent"/>
     </extensions>
+    <actions>
+        <action class="com.github.si9ma.codetimejetbrains.Menu" text="CodeTime">
+            <add-to-group group-id="ToolsMenu"/>
+        </action>
+    </actions>
 </idea-plugin>
