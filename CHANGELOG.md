@@ -8,4 +8,8 @@
 
 ## [0.0.2]
 ### Added
-- support configuration window
+- change backend api domain
+
+## [0.0.1]
+### Added
+- support options configuration(token and debug mode)
