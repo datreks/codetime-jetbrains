@@ -3,8 +3,8 @@
 # codetime Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+### Changed
+- Modify the minimum compatible IDE version
 
 ## [0.0.3] - 2020-12-16
 ### Removed
