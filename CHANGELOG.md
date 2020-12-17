@@ -3,6 +3,18 @@
 # codetime Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [0.0.4]
 ### Changed
 - Modify the minimum compatible IDE version
 
