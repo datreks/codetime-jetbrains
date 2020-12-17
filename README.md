@@ -1,8 +1,8 @@
 # codetime
 
 ![Build](https://github.com/Data-Trekkers/codetime-jetbrains/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/codetime.svg)](https://plugins.jetbrains.com/plugin/codetime)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/codetime.svg)](https://plugins.jetbrains.com/plugin/codetime)
+[![Version](https://img.shields.io/jetbrains/plugin/v/15507-codetime.svg)](https://plugins.jetbrains.com/plugin/15507-codetime)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/15507-codetime.svg)](https://plugins.jetbrains.com/plugin/15507-codetime)
 
 <!-- Plugin description -->
 Codetime jetbrains plugin. Statistical analysis of programming time.
