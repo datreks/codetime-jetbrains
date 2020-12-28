@@ -4,21 +4,17 @@
 
 ## [Unreleased]
 ### Added
+- Add hint information at the configuration window
 
 ### Changed
+- Change deprecated api
+- Modify the minimum compatible IDE version
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [0.0.4]
 ### Changed
 - Modify the minimum compatible IDE version
 
-## [0.0.3] - 2020-12-16
+## [0.0.3]
 ### Removed
 - remove unnecessary code
 

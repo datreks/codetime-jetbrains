@@ -1,5 +1,6 @@
 package com.github.si9ma.codetimejetbrains
 
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
@@ -9,7 +10,7 @@ import com.intellij.openapi.components.Storage
     name = "PluginStateComponent",
     storages = [Storage("codetime.xml")]
 )
-open class PluginStateComponent : PersistentStateComponent<PluginStateComponent.PluginState> {
+open class PluginStateComponent : PersistentStateComponent<PluginStateComponent.PluginState>, Disposable {
     // this is how we're going to call the component from different classes
     companion object {
         val instance: PluginStateComponent
@@ -17,7 +18,7 @@ open class PluginStateComponent : PersistentStateComponent<PluginStateComponent.
     }
 
     // the component will always keep our state as a variable
-    var pluginState: PluginState = PluginState()
+    private var pluginState: PluginState = PluginState()
 
     override fun getState(): PluginState {
         return pluginState
@@ -30,5 +31,9 @@ open class PluginStateComponent : PersistentStateComponent<PluginStateComponent.
     class PluginState {
         var token = ""
         var debug = false
+    }
+
+    override fun dispose() {
+        TODO("Not yet implemented")
     }
 }

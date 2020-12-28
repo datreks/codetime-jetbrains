@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin require-restart="true">
     <id>com.github.si9ma.codetimejetbrains</id>
     <name>codetime</name>
     <vendor>si9ma</vendor>
