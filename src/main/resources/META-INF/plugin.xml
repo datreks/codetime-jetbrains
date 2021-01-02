@@ -1,7 +1,7 @@
 <idea-plugin require-restart="true">
     <id>com.github.si9ma.codetimejetbrains</id>
     <name>codetime</name>
-    <vendor>si9ma</vendor>
+    <vendor url="https://codetime.datreks.com/" email="codetime@datreks.com">CodeTime</vendor>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
