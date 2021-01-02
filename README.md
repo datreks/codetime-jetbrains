@@ -8,21 +8,21 @@
 <!-- Plugin description -->
 Codetime jetbrains plugin. Statistical analysis of your programming time.
 <!-- Plugin description end -->
+
 ## Support Jetbrains IDES
 
-[![Android Studio](https://upload.wikimedia.org/wikipedia/commons/8/8f/Breezeicons-apps-48-android-studio.svg)](https://developer.android.com/studio)
+[![Android Studio](./img/android-studio.svg)](https://developer.android.com/studio)
 [![CLion](https://github.com/JetBrains/logos/blob/master/web/clion/clion.svg)](https://www.jetbrains.com/clion/)
 [![DataGrip](https://github.com/JetBrains/logos/blob/master/web/datagrip/datagrip.svg)](https://www.jetbrains.com/datagrip/)
 [![GoLand](https://github.com/JetBrains/logos/blob/master/web/goland/goland.svg)](https://www.jetbrains.com/goland/)
 [![IntelliJ IDEA](https://github.com/JetBrains/logos/blob/master/web/intellij-idea/intellij-idea.svg)](https://www.jetbrains.com/idea/)
-[![MPS](https://github.com/JetBrains/logos/blob/master/web/mps/mps.svg)](https://www.jetbrains.com/mps/)
+[![MPS](./img/mps.svg)](https://www.jetbrains.com/mps/)
 [![AppCode](https://github.com/JetBrains/logos/blob/master/web/appcode/appcode.svg)](https://www.jetbrains.com/appcode/)
 [![PhpStorm](https://github.com/JetBrains/logos/blob/master/web/phpstorm/phpstorm.svg)](https://www.jetbrains.com/phpstorm/)
 [![PyCharm](https://github.com/JetBrains/logos/blob/master/web/pycharm/pycharm.svg)](https://www.jetbrains.com/pycharm/)
 [![Rider](https://github.com/JetBrains/logos/blob/master/web/rider/rider.svg)](https://www.jetbrains.com/rider/)
 [![RubyMine](https://github.com/JetBrains/logos/blob/master/web/rubymine/rubymine.svg)](https://www.jetbrains.com/rubymine/)
 [![WebStorm](https://github.com/JetBrains/logos/blob/master/web/webstorm/webstorm.svg)](https://www.jetbrains.com/webstorm/)
-
 
 <!-- Plugin description -->
 ## Installation
