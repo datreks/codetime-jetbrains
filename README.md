@@ -6,8 +6,11 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/15507-codetime.svg)](https://plugins.jetbrains.com/plugin/15507-codetime)
 
 <!-- Plugin description -->
-Codetime jetbrains plugin. Statistical analysis of your programming time.
+[Codetime](https://codetime.datreks.com/) jetbrains plugin. Statistical analysis of your programming time.
 <!-- Plugin description end -->
+
+![CodeTime Dashboard](img/dashboard-light.png)
+![CodeTime Dashboard](img/dashboard-dark.png)
 
 ## Support Jetbrains IDES
 
@@ -24,7 +27,6 @@ Codetime jetbrains plugin. Statistical analysis of your programming time.
 [![RubyMine](https://github.com/JetBrains/logos/blob/master/web/rubymine/rubymine.svg)](https://www.jetbrains.com/rubymine/)
 [![WebStorm](https://github.com/JetBrains/logos/blob/master/web/webstorm/webstorm.svg)](https://www.jetbrains.com/webstorm/)
 [![Android Studio](./img/android-studio.svg)](https://developer.android.com/studio)
-
 
 <!-- Plugin description -->
 ## Installation
@@ -49,4 +51,23 @@ Codetime jetbrains plugin. Statistical analysis of your programming time.
 
 - Visit https://codetime.datreks.com/ to see your code time statistical analysis.
 
+## Configuration
+
+<kbd>Tools</kbd> > <kbd>Codetime Configuration</kbd> > <kbd>Input Token</kbd>
 <!-- Plugin description end -->
+
+![Configuration](./img/configuration.png)
+
+<!-- Plugin description -->
+## Troubleshooting
+- Turn debug mode:
+
+  <kbd>Tools</kbd> > <kbd>Codetime Configuration</kbd> > <kbd>Enable Debug Mode</kbd>
+
+
+- Check Log(idea.log file):
+
+  <kbd>Help</kbd> > <kbd>Show Log</kbd>
+<!-- Plugin description end -->
+
+![Troubleshooting](./img/configuration.png)

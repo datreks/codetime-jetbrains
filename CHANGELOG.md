@@ -4,16 +4,11 @@
 
 ## [Unreleased]
 ### Added
+- add plugin vendor
 
 ### Changed
+- update description
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [0.0.5]
 ### Added
 - Add hint information at the configuration window

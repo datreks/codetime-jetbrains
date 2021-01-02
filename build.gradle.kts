@@ -95,7 +95,7 @@ tasks {
         sinceBuild(pluginSinceBuild)
         untilBuild(pluginUntilBuild)
 
-        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+        // Extract all the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         pluginDescription(
             closure {
                 File("./README.md").readText().lines().run {
@@ -105,7 +105,23 @@ tasks {
                     if (!containsAll(listOf(start, end))) {
                         throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
                     }
-                    subList(indexOf(start) + 1, indexOf(end))
+                    val descriptionList = ArrayList<String>()
+                    var inDescription = false
+                    // There may be many <!-- Plugin description --> section
+                    forEach tmp@{
+                        if (it == start) {
+                            inDescription = true
+                            return@tmp
+                        }
+                        if (it == end) {
+                            inDescription = false
+                            return@tmp
+                        }
+                        if (inDescription) {
+                            descriptionList.add(it)
+                        }
+                    }
+                    descriptionList
                 }.joinToString("\n").run { markdownToHTML(this) }
             }
         )
