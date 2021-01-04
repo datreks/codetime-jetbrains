@@ -4,6 +4,7 @@
 ![Build](https://github.com/Data-Trekkers/codetime-jetbrains/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/15507-codetime.svg)](https://plugins.jetbrains.com/plugin/15507-codetime)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/15507-codetime.svg)](https://plugins.jetbrains.com/plugin/15507-codetime)
+[![Visit](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdatreks%2Fcodetime-jetbrains&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visit&edge_flat=false)](https://hits.seeyoufarm.com)
 
 <!-- Plugin description -->
 [Codetime](https://codetime.datreks.com/) jetbrains plugin. Statistical analysis of your programming time.
