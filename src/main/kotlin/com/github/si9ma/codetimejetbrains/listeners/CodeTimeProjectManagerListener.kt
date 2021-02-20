@@ -25,7 +25,7 @@ import kotlin.concurrent.timerTask
 const val TIMER_DELAY = 100
 const val TIMER_PERIOD = 30 * 1000
 const val PLUGIN_NAME = "codetime-jetbrains"
-const val PLUGIN_VERSION = "0.0.7"
+const val PLUGIN_VERSION = "0.0.8"
 
 class CodeTimeProjectManagerListener : ProjectManagerListener {
     private val log: Logger = Logger.getInstance("CodeTime")

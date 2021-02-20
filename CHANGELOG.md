@@ -3,17 +3,9 @@
 # codetime Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
+- Modify the maximum compatible IDE version
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [0.0.7]
 ### Added
 - batch submit event log
