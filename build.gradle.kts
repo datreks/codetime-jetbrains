@@ -27,7 +27,7 @@ val pluginVersion: String by project
 val pluginSinceBuild: String by project
 val pluginUntilBuild: String by project
 val pluginVerifierIdeVersions: String by project
-val verifierVersion: String by project
+val pluginVerifierVersion: String by project
 
 val platformType: String by project
 val platformVersion: String by project
@@ -136,8 +136,8 @@ tasks {
     }
 
     runPluginVerifier {
+        verifierVersion(pluginVerifierVersion)
         ideVersions(pluginVerifierIdeVersions)
-        verifierVersion(verifierVersion)
     }
 
     publishPlugin {
