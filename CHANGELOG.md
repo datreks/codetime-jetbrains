@@ -14,6 +14,11 @@
 ### Fixed
 
 ### Security
+
+## [Unreleased]
+### Changed
+- disable maximum compatible IDE version limit
+
 ## [0.0.8]
 ### Changed
 - Modify the maximum compatible IDE version
