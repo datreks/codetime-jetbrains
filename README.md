@@ -7,7 +7,7 @@
 [![Visit](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdatreks%2Fcodetime-jetbrains&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visit&edge_flat=false)](https://hits.seeyoufarm.com)
 
 <!-- Plugin description -->
-[Codetime](https://codetime.datreks.com/) jetbrains plugin. Statistical analysis of your programming time.
+[Codetime](https://codetime.dev/) jetbrains plugin. Statistical analysis of your programming time.
 <!-- Plugin description end -->
 
 ![CodeTime Dashboard](img/dashboard-light.png)
@@ -34,7 +34,7 @@
 
 - Using IDE built-in plugin system:
 
-  <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "codetime"</kbd> >
+  <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "CodeTime"</kbd> >
   <kbd>Install Plugin</kbd>
 
 - Manually:
@@ -44,27 +44,27 @@
 
 ## Usage
 
-- Access https://codetime.datreks.com/ to signup and get an api token
+- Access https://codetime.dev/ to signup and get an api token
 
 - Restart your IDE after you install plugin
 
 - Enter api token in the CodeTime configuration window
 
-- Visit https://codetime.datreks.com/ to see your code time statistical analysis.
+- Visit https://codetime.dev/ to see your code time statistical analysis.
 
 ## Configuration
 
-<kbd>Tools</kbd> > <kbd>Codetime Configuration</kbd> > <kbd>Input Token</kbd>
+<kbd>Tools</kbd> > <kbd>CodeTime Configuration</kbd> > <kbd>Input Token</kbd>
 <!-- Plugin description end -->
 
 ![Configuration](./img/configuration.png)
 
 <!-- Plugin description -->
 ## Troubleshooting
+
 - Turn debug mode:
 
-  <kbd>Tools</kbd> > <kbd>Codetime Configuration</kbd> > <kbd>Enable Debug Mode</kbd>
-
+  <kbd>Tools</kbd> > <kbd>CodeTime Configuration</kbd> > <kbd>Enable Debug Mode</kbd>
 
 - Check Log(idea.log file):
 

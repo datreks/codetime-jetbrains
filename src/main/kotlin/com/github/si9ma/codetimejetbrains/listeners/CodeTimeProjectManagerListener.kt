@@ -25,7 +25,7 @@ import kotlin.concurrent.timerTask
 const val TIMER_DELAY = 100
 const val TIMER_PERIOD = 30 * 1000
 const val PLUGIN_NAME = "codetime-jetbrains"
-const val PLUGIN_VERSION = "0.0.8"
+const val PLUGIN_VERSION = "0.1.0"
 
 class CodeTimeProjectManagerListener : ProjectManagerListener {
     private val log: Logger = Logger.getInstance("CodeTime")
@@ -76,16 +76,21 @@ class CodeTimeProjectManagerListener : ProjectManagerListener {
             val absoluteFile = event["absoluteFile"]
             event["project"] = project.name
             event["platform"] = System.getProperty("os.name")
-            event["platformVersion"] = System.getProperty("os.version")
+//            event["platformVersion"] = System.getProperty("os.version")
             event["platformArch"] = System.getProperty("os.arch")
             event["editor"] = ApplicationNamesInfo.getInstance().fullProductName
-            event["editorVersion"] = ApplicationInfo.getInstance().fullVersion
-            event["sessionID"] = uuid
+            event["language"] = event["language"] ?: "plaintext"
+//            event["editorVersion"] = ApplicationInfo.getInstance().fullVersion
+//            event["sessionID"] = uuid
             event["plugin"] = PLUGIN_NAME
-            event["pluginVersion"] = PLUGIN_VERSION
+//            event["pluginVersion"] = PLUGIN_VERSION
             event["relativeFile"] = projectPath?.let { absoluteFile.toString().removePrefix(it) } ?: ""
+            event.remove("absoluteFile")
         }
-        Fuel.post("https://codetime-api.datreks.com/batchEventLog")
+        println(Klaxon().toJsonString(events))
+        Fuel.post("https://api.codetime.dev/batchEventLog")
+//        Fuel.post("http://localhost:8081/batchEventLog")
+            .header("User-Agent", "CodeTime Client")
             .header("token", PluginStateComponent.instance.state.token)
             .jsonBody(Klaxon().toJsonString(events)).responseJson() { _, _, result ->
                 result.fold(

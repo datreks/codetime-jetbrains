@@ -24,7 +24,7 @@ import javax.swing.JPanel
 import javax.swing.JTextField
 
 const val TOKEN_FIELD_COLUMNS = 30
-const val TIP_TEXT = "Go to codetime to get a token"
+const val TIP_TEXT = "Go to CodeTime to get a token"
 
 class ConfigWindow constructor(project: Project) : DialogWrapper(project, true) {
     private lateinit var tokenField: JTextField
@@ -84,14 +84,16 @@ class ConfigWindow constructor(project: Project) : DialogWrapper(project, true) 
 
     override fun doOKAction() {
         // check if token is valid
-        val (_, _, result) = Fuel.get("https://codetime-api.datreks.com/checkLogin").header("token", tokenField.text)
+        val (_, _, result) = Fuel.get("https://api.codetime.dev/stats?by=time")
+            .header("token", tokenField.text)
+            .header("User-Agent", "CodeTime Client")
             .responseJson()
         when (result) {
-            is Result.Failure -> {
+            is Result.Failure<*> -> {
                 log.warn("check token failed:${result.error}")
                 JOptionPane.showMessageDialog(null, "Invalid token")
             }
-            is Result.Success -> {
+            is Result.Success<*> -> {
                 log.info("check token success")
                 PluginStateComponent.instance.state.token = tokenField.text
                 PluginStateComponent.instance.state.debug = debugCheckBox.isSelected
