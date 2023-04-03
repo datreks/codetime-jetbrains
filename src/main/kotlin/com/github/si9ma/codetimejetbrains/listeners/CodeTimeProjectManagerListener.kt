@@ -8,7 +8,7 @@ import com.github.si9ma.codetimejetbrains.ConfigWindow
 import com.github.si9ma.codetimejetbrains.PluginStateComponent
 import com.github.si9ma.codetimejetbrains.Queue
 import com.intellij.ide.plugins.PluginManagerCore
-//import com.intellij.openapi.application.ApplicationInfo
+// import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.application.ApplicationNamesInfo
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.EditorFactory
@@ -23,7 +23,7 @@ import kotlin.concurrent.timerTask
 const val TIMER_DELAY = 100
 const val TIMER_PERIOD = 30 * 1000
 const val PLUGIN_NAME = "codetime-jetbrains"
-//const val PLUGIN_VERSION = "0.1.0"
+// const val PLUGIN_VERSION = "0.1.0"
 
 class CodeTimeProjectManagerListener : ProjectManagerListener {
     private val log: Logger = Logger.getInstance("CodeTime")
