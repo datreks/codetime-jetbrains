@@ -7,9 +7,8 @@ import com.github.kittinunf.fuel.json.responseJson
 import com.github.si9ma.codetimejetbrains.ConfigWindow
 import com.github.si9ma.codetimejetbrains.PluginStateComponent
 import com.github.si9ma.codetimejetbrains.Queue
-import com.google.common.primitives.UnsignedInts.toLong
 import com.intellij.ide.plugins.PluginManagerCore
-import com.intellij.openapi.application.ApplicationInfo
+//import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.application.ApplicationNamesInfo
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.EditorFactory
@@ -19,19 +18,17 @@ import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.ui.Messages
 import java.util.Timer
-import java.util.UUID
 import kotlin.concurrent.timerTask
 
 const val TIMER_DELAY = 100
 const val TIMER_PERIOD = 30 * 1000
 const val PLUGIN_NAME = "codetime-jetbrains"
-const val PLUGIN_VERSION = "0.1.0"
+//const val PLUGIN_VERSION = "0.1.0"
 
 class CodeTimeProjectManagerListener : ProjectManagerListener {
     private val log: Logger = Logger.getInstance("CodeTime")
 
     override fun projectOpened(project: Project) {
-        val uuid = UUID.randomUUID().toString()
 
         // no token, popup a configuration window
         if (PluginStateComponent.instance.state.token == "") {
@@ -53,11 +50,11 @@ class CodeTimeProjectManagerListener : ProjectManagerListener {
                         events.add(event)
                         idx++
                     }
-                    submitEventLog(project, uuid, events)
+                    submitEventLog(project, events)
                 }
             },
-            toLong(TIMER_DELAY),
-            toLong(TIMER_PERIOD)
+            TIMER_DELAY.toLong(),
+            TIMER_PERIOD.toLong()
         )
     }
 
@@ -70,7 +67,7 @@ class CodeTimeProjectManagerListener : ProjectManagerListener {
         )
     }
 
-    private fun submitEventLog(project: Project, uuid: String, events: MutableList<MutableMap<String, Any>>) {
+    private fun submitEventLog(project: Project, events: MutableList<MutableMap<String, Any>>) {
         val projectPath: String? = project.guessProjectDir()?.path
         for (event in events) {
             val absoluteFile = event["absoluteFile"]
@@ -92,7 +89,7 @@ class CodeTimeProjectManagerListener : ProjectManagerListener {
 //        Fuel.post("http://localhost:8081/batchEventLog")
             .header("User-Agent", "CodeTime Client")
             .header("token", PluginStateComponent.instance.state.token)
-            .jsonBody(Klaxon().toJsonString(events)).responseJson() { _, _, result ->
+            .jsonBody(Klaxon().toJsonString(events)).responseJson { _, _, result ->
                 result.fold(
                     success = {
                         if (PluginStateComponent.instance.state.debug) {
